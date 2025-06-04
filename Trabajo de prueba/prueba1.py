@@ -4,16 +4,23 @@
 # Desarrollaremos un código que implemente una estructura de árbol de búsqueda en Python, donde se enlistarán estudiantes de una clase y sus respectivas calificaciones.
 # Cada estudiante tendrá un nombre y una calificación, y el árbol permitirá insertar estudiantes de manera ordenada según sus calificaciones.
 
+# Definimos una clase ArbolBusqueda que contendrá la raíz del árbol y métodos para insertar estudiantes.
 class ArbolBusqueda:
+
+
+    # Inicializamos el árbol de búsqueda con una raíz vacía.
     def __init__(self):
         self.raiz = None
 
+
+    # Método para insertar un estudiante en el árbol.    
     def insertar(self, estudiante):
         if self.raiz is None:
             self.raiz = Nodo(estudiante)
         else:
             self._insertar_recursivo(self.raiz, estudiante)
 
+    # Método recursivo para insertar un estudiante en el árbol de búsqueda.
     def _insertar_recursivo(self, nodo, estudiante):
         if estudiante.calificacion < nodo.valor.calificacion:
             if nodo.hijos and nodo.hijos[0]:
@@ -26,6 +33,7 @@ class ArbolBusqueda:
             else:
                 nodo.agregar_hijo(Nodo(estudiante))
 
+    # Método para buscar un estudiante por nombre en el árbol.
     def __repr__(self):
         return f"ArbolBusqueda(raiz={self.raiz})"
     
@@ -40,9 +48,9 @@ class Estudiante:
         return f"Estudiante(nombre={self.nombre}, calificacion={self.calificacion})"
 
 
-# Para la creación de un árbol debemos definir una clase Nodo que contenga un valor y referencias a sus hijos (hijo izquiero, hijo derecho).
-# Esta clase puede ser utilizada para construir un árbol binario o cualquier otro tipo de estructura de árbol.
-
+# Para la creación de un árbol debemos definir una clase Nodo que contenga un valor y referencias a sus hijos (hijo izquiero, hijo derecho) que serán las posiciones que ocuparan los valores a medida 
+# incorporen al árbol.
+# Cada nodo contendrá un valor (en este caso, un objeto Estudiante) y una lista de hijos.
 
 class Nodo:
     def __init__(self, valor):
