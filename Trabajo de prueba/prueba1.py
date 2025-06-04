@@ -62,3 +62,126 @@ class Nodo:
 
     def __repr__(self):
         return f"Nodo({self.valor})"
+
+# Creación de un árbol de búsqueda binario.
+arbol = ArbolBusqueda()
+
+# Inserción de estudiantes en el árbol.
+print("Insertando estudiantes en el árbol de búsqueda...")
+estudiantes = [
+    Estudiante("Alicia", 85),
+    Estudiante("Bastian", 75),
+    Estudiante("Carlos", 90),
+    Estudiante("David", 60),
+    Estudiante("Emily", 95)
+]
+
+# print(raíz.hijos) #Sirve para verificar los hijos del nodo raíz.
+
+#Ciclo iterador para mostrar los estudiantes que se agregaron en el árbol.
+for estudiante in estudiantes:
+    arbol.insertar(estudiante)
+    print(f"Estudiante incorporado: {estudiante}")
+
+# Menú de opciones para interactuar con el árbol.
+# Definimos una función para mostrar el menú de opciones.
+def menu():
+    print("\nMenú de opciones:")
+    print("1. Insertar estudiante")
+    print("2. Mostrar árbol")
+    print("3. Buscar estudiante")
+    print("4. Eliminar estudiante")
+    print("5. Actualizar calificación")
+    print("6. Mostrar estudiantes ordenados por calificación")
+    print("7. Mostrar estudiantes aprobados (calificación >= 60)")
+    print("8. Mostrar estudiantes desaprobados")
+    print("9. Salir")
+    opcion = input("Seleccione una opción: ")
+    return opcion
+
+# Bucle principal para interactuar con el árbol.
+while True:
+    opcion = menu()
+    
+    if opcion == "1":
+        nombre = input("Ingrese el nombre del estudiante: ")
+        calificacion = float(input("Ingrese la calificación del estudiante: "))
+        nuevo_estudiante = Estudiante(nombre, calificacion)
+        arbol.insertar(nuevo_estudiante)
+        print(f"Estudiante {nombre} con calificación {calificacion} insertado en el árbol.")
+    
+
+    elif opcion == "2":
+        print("Árbol de búsqueda actual:")
+        print(arbol)
+    
+
+    elif opcion == "3":
+        nombre = input("Ingrese el nombre del estudiante a buscar: ")
+        encontrado = False
+        for nodo in arbol.raiz.hijos:
+            if nodo.valor.nombre == nombre:
+                print(f"Estudiante encontrado: {nodo.valor}")
+                encontrado = True
+                break
+        if not encontrado:
+            print(f"Estudiante {nombre} no encontrado en el árbol.")
+
+
+    elif opcion == "4":
+        nombre = input("Ingrese el nombre del estudiante a eliminar: ")
+        encontrado = False
+        for nodo in arbol.raiz.hijos:
+            if nodo.valor.nombre == nombre:
+                arbol.raiz.hijos.remove(nodo)
+                print(f"Estudiante {nombre} eliminado del árbol.")
+                encontrado = True
+                break
+        if not encontrado:
+            print(f"Estudiante {nombre} no encontrado en el árbol.")
+
+
+    elif opcion == "5":
+        nombre = input("Ingrese el nombre del estudiante a actualizar: ")
+        nueva_calificacion = float(input("Ingrese la nueva calificación: "))
+        encontrado = False
+        for nodo in arbol.raiz.hijos:
+            if nodo.valor.nombre == nombre:
+                nodo.valor.calificacion = nueva_calificacion
+                print(f"Calificación de {nombre} actualizada a {nueva_calificacion}.")
+                encontrado = True
+                break
+        if not encontrado:
+            print(f"Estudiante {nombre} no encontrado en el árbol.")
+
+
+    elif opcion == "6":
+        print("Estudiantes ordenados por calificación:")
+        estudiantes_ordenados = sorted(arbol.raiz.hijos, key=lambda x: x.valor.calificacion)
+        for nodo in estudiantes_ordenados:
+            print(nodo.valor)
+
+
+    elif opcion == "7":
+        print("Estudiantes con calificación de aprobación (mayor o igual a 60):")
+        estudiantes_aprobados = [nodo.valor for nodo in arbol.raiz.hijos if nodo.valor.calificacion >= 60]
+        if estudiantes_aprobados:
+            for estudiante in estudiantes_aprobados:
+                print(estudiante)
+        else:
+            print("No hay estudiantes aprobados.")
+
+    elif opcion == "8":
+        print("Estudiantes desaprobados (calificación menor a 60):")
+        estudiantes_desaprobados = [nodo.valor for nodo in arbol.raiz.hijos if nodo.valor.calificacion < 60]
+        if estudiantes_desaprobados:
+            for estudiante in estudiantes_desaprobados:
+                print(estudiante)
+        else:
+            print("No hay estudiantes desaprobados.")
+    elif opcion == "9":
+        print("Saliendo del programa.")
+        break
+
+    else:
+        print("Opción no válida. Intente nuevamente.")
