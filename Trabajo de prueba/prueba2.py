@@ -6,11 +6,11 @@ class ArbolBusqueda:
     def __init__(self):
         self.raiz = None
 
- # Método para insertar un estudiante en el árbol.
+# Método para insertar un estudiante en el árbol.
     def insertar(self, estudiante):
         self.raiz = self._insertar_recursivo(self.raiz, estudiante)
 
-  # Método recursivo para insertar un estudiante en el árbol de búsqueda.
+# Método recursivo para insertar un estudiante en el árbol de búsqueda.
     def _insertar_recursivo(self, nodo, estudiante):
         if nodo is None:
             return Nodo(estudiante)
@@ -34,6 +34,7 @@ class ArbolBusqueda:
         if encontrado is None:
             encontrado = self._buscar_recursivo(nodo.derecha, nombre)
         return encontrado
+    
 # Método para mostrar los estudiantes en orden (preorden,inorden, postorden).
     def mostrar_inorden(self, nodo):
         if nodo:
@@ -53,6 +54,7 @@ class ArbolBusqueda:
             self.mostrar_postorden(nodo.derecha) #hijo derecho
             print(nodo.valor)
 
+#Métodos para mostrar los estudiantes aprobados y desaprobados.
     def mostrar_aprobados(self, nodo):
         if nodo:
             self.mostrar_aprobados(nodo.izquierda)
@@ -66,15 +68,15 @@ class ArbolBusqueda:
             if nodo.valor.calificacion < 60:
                 print(nodo.valor)
             self.mostrar_desaprobados(nodo.derecha)
-    
-    # Definimos una clase Estudiante que contendrá el nombre y la calificación del estudiante.
+
+# Definimos una clase Estudiante que contendrá el nombre y la calificación del estudiante.
 class Estudiante:
     def __init__(self, nombre, calificacion):
         self.nombre = nombre
         self.calificacion = calificacion
 
     def __repr__(self):
-        return f"{self.nombre} - {self.calificacion}"
+        return f"Estudiante: {self.nombre} - Calificación: {self.calificacion}"
 
 # Para la creación de un árbol debemos definir una clase Nodo que contenga un valor y referencias a sus hijos
 class Nodo:
@@ -105,10 +107,11 @@ def menu():
 arbol = ArbolBusqueda()
 
 # Insertamos algunos estudiantes iniciales
-for nombre, nota in [("Alicia", 85), ("Bastian", 75), ("Carlos", 90), ("David", 55), ("Emily", 95)]:
+for nombre, nota in [("Alicia", 85), ("Bastian", 75), ("Carlos", 90), ("David", 55), ("Emily", 95), ("Federico", 30)]:
     arbol.insertar(Estudiante(nombre, nota))
 
 seguir = True # Variable para controlar el bucle del menú, se corta si se selecciona la opción de salir.
+# Bucle principal del programa. Muestra el menú y permite interactuar con el árbol.
 while seguir:
     opcion = menu()
     if opcion == "1":
