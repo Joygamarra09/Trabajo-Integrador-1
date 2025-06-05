@@ -23,7 +23,8 @@ class ArbolBusqueda:
 #Método para buscar un estudiante por nombre en el árbol.
     def buscar(self, nombre):
         return self._buscar_recursivo(self.raiz, nombre)
-    
+
+#Función recursiva para buscar un estudiante por nombre en el árbol.
     def _buscar_recursivo(self, nodo, nombre):
         if nodo is None:
             return None
@@ -33,12 +34,24 @@ class ArbolBusqueda:
         if encontrado is None:
             encontrado = self._buscar_recursivo(nodo.derecha, nombre)
         return encontrado
-
+# Método para mostrar los estudiantes en orden (preorden,inorden, postorden).
     def mostrar_inorden(self, nodo):
         if nodo:
             self.mostrar_inorden(nodo.izquierda) #hijo izquierdo
             print(nodo.valor)
             self.mostrar_inorden(nodo.derecha) #hijo derecho
+
+    def mostrar_preorden(self, nodo):
+        if nodo:
+            print(nodo.valor)
+            self.mostrar_preorden(nodo.izquierda) #hijo izquierdo
+            self.mostrar_preorden(nodo.derecha) #hijo derecho
+
+    def mostrar_postorden(self, nodo):
+        if nodo:
+            self.mostrar_postorden(nodo.izquierda) #hijo izquierdo
+            self.mostrar_postorden(nodo.derecha) #hijo derecho
+            print(nodo.valor)
 
     def mostrar_aprobados(self, nodo):
         if nodo:
@@ -80,7 +93,7 @@ def menu():
     print("--- Menú Gestor de Calificaciones ---")
     print("1. Insertar estudiante")
     print("2. Buscar estudiante")
-    print("3. Mostrar todos (inorden)")
+    print("3. Mostrar todos (preorden, inorden, postorden)")
     print("4. Mostrar aprobados (>= 60)")
     print("5. Mostrar desaprobados (< 60)")
     print("6. Salir")
@@ -95,9 +108,9 @@ arbol = ArbolBusqueda()
 for nombre, nota in [("Alicia", 85), ("Bastian", 75), ("Carlos", 90), ("David", 55), ("Emily", 95)]:
     arbol.insertar(Estudiante(nombre, nota))
 
-while True:
+seguir = True # Variable para controlar el bucle del menú, se corta si se selecciona la opción de salir.
+while seguir:
     opcion = menu()
-
     if opcion == "1":
         nombre = input("Nombre del estudiante: ")
         try:
@@ -106,9 +119,9 @@ while True:
                 arbol.insertar(Estudiante(nombre, nota))
                 print("Estudiante insertado.")
             else:
-                print(" Calificación inválida.")
+                print("Calificación inválida.")
         except ValueError:
-            print(" Entrada no válida.")
+            print("Entrada no válida.")
 
     elif opcion == "2":
         nombre = input("Nombre a buscar: ")
@@ -119,20 +132,23 @@ while True:
             print("Estudiante no encontrado.")
 
     elif opcion == "3":
+        print("--- Estudiantes (preorden) ---")
+        arbol.mostrar_preorden(arbol.raiz)
         print("--- Estudiantes (inorden) ---")
         arbol.mostrar_inorden(arbol.raiz)
+        print("--- Estudiantes (postorden) ---")
+        arbol.mostrar_postorden(arbol.raiz)
 
     elif opcion == "4":
-        print("\n--- Aprobados (>= 60) ---")
+        print("--- Aprobados (>= 60) ---")
         arbol.mostrar_aprobados(arbol.raiz)
 
     elif opcion == "5":
-        print("\n--- Desaprobados (< 60) ---")
+        print("--- Desaprobados (< 60) ---")
         arbol.mostrar_desaprobados(arbol.raiz)
 
     elif opcion == "6":
         print("Saliendo...")
-        break
-
+        seguir = False # Termina el bucle del menú.
     else:
         print("Opción inválida.")
