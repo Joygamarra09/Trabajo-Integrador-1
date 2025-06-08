@@ -28,7 +28,7 @@ class ArbolBusqueda:
     def _buscar_recursivo(self, nodo, nombre):
         if nodo is None:
             return None
-        if nodo.valor.nombre == nombre:
+        if nodo.valor.nombre.lower() == nombre.lower():
             return nodo.valor
         encontrado = self._buscar_recursivo(nodo.izquierda, nombre)
         if encontrado is None:
