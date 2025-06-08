@@ -4,7 +4,7 @@
 📍 *Universidad Tecnológica Nacional*  
 
 ## ✨ Estudiantes  
- **Nombre:** Pérez, Virginia 
+- **Nombre:** Pérez, Virginia 
 - **Comisión:** M2025-4
   
 - **Nombre:** Gamarra, Joana 
