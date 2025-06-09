@@ -1,25 +1,18 @@
 #Definición de funciones
+    def mostrar_inorden(self, nodo):
+        if nodo:
+            self.mostrar_inorden(nodo.izquierda) #hijo izquierdo
+            print(nodo.valor)
+            self.mostrar_inorden(nodo.derecha) #hijo derecho
 
+    def mostrar_preorden(self, nodo):
+        if nodo:
+            print(nodo.valor)
+            self.mostrar_preorden(nodo.izquierda) #hijo izquierdo
+            self.mostrar_preorden(nodo.derecha) #hijo derecho
 
-"""Funciones para el recorrido del árbol"""
-
-def preorden(arbol):
-    if arbol:
-        print(arbol[0], end=' ')
-        preorden(arbol[1])
-        preorden(arbol[2])
-
-
-def inorden(arbol):
-    if arbol:
-        inorden(arbol[1])
-        print(arbol[0], end=' ')
-        inorden(arbol[2])
-
-
-def postorden(arbol):
-    if arbol:
-        postorden(arbol[1])
-        postorden(arbol[2])
-        print(arbol[0], end=' ')
-
+    def mostrar_postorden(self, nodo):
+        if nodo:
+            self.mostrar_postorden(nodo.izquierda) #hijo izquierdo
+            self.mostrar_postorden(nodo.derecha) #hijo derecho
+            print(nodo.valor)
