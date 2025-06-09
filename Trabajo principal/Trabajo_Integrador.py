@@ -116,6 +116,19 @@ while seguir:
     opcion = menu()
     if opcion == "1":
         nombre = input("Nombre del estudiante: ")
+
+ # Validamos que el nombre contenga solo letras o espacios
+        if not nombre.replace(" ", "").isalpha():
+            print("Nombre inválido. Debe contener solo letras y espacios.")
+            continue
+
+        nombre = nombre.lower().strip()  # Normalizamos el nombre
+
+        # Verificamos si el estudiante ya existe en el árbol
+        if arbol.buscar(nombre):
+            print("El estudiante ingresado ya existe.")
+            continue
+
         try:
             nota = float(input("Calificación (1 a 100): "))
             if 0 <= nota <= 100:
