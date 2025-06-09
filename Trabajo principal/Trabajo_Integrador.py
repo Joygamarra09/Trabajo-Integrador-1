@@ -131,7 +131,7 @@ while seguir:
 
         try:
             nota = float(input("Calificación (1 a 100): "))
-            if 0 <= nota <= 100:
+            if 1 <= nota <= 100:
                 arbol.insertar(Estudiante(nombre, nota))
                 print("Estudiante insertado.")
             else:
